@@ -1,0 +1,15 @@
+.button {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-button);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.button:focus-visible {
+  outline: 3px solid #172033;
+  outline-offset: 3px;
+}
