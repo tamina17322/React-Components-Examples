@@ -1,5 +1,6 @@
 import Button from './components/Button/button.jsx';
 import Input from './components/input/input.jsx';
+import Card from './components/Card/Card.jsx';
 import { useState } from 'react';
 
 export default function App() {
@@ -33,24 +34,24 @@ export default function App() {
 
 
       <div>
-        <card
+        <Card
           title="React Course"
           description=" Learn react components.">
 
-          <button>Learn More</button>
-        </card>
+          <Button>Learn More</Button>
+        </Card>
       </div>
 
       <br />
 
 
       <div>
-        <card
+        <Card
           title="Design"
           description="Additional info.">
 
-          <input placeholder='Type something'></input>
-        </card>
+          <Input placeholder='Type something'/>
+        </Card>
       </div>
 
       <div>

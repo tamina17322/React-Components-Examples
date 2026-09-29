@@ -1,15 +1,15 @@
-.card{
-    padding: 15px;
-    border-radius:10px;
-    border: 1px solide #ddd;
+.card {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
-.card h3{
-    font-style: italic;
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 10px;
+.card h3 {
+  font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 10px;
 }
 
 .card p {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
