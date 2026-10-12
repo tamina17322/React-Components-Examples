@@ -1,118 +1,136 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./DesignSystem.css";
+
+type ColorToken = {
+  name: string;
+  variable: string;
+};
+
+type ThemeToken = {
+  name: string;
+  usage: string;
+  variable: string;
+};
 
 const colors = {
   neutrals: [
-    { name: "Neutral 000", hex: "#FFFFFF" },
-    { name: "Neutral 050", hex: "#F8FAFC" },
-    { name: "Neutral 100", hex: "#F1F5F9" },
-    { name: "Neutral 200", hex: "#E2E8F0" },
-    { name: "Neutral 300", hex: "#CBD5E1" },
-    { name: "Neutral 400", hex: "#94A3B8" },
-    { name: "Neutral 500", hex: "#64748B" },
-    { name: "Neutral 600", hex: "#475569" },
-    { name: "Neutral 700", hex: "#334155" },
-    { name: "Neutral 800", hex: "#1E293B" },
-    { name: "Neutral 900", hex: "#0F172A" },
-    { name: "Neutral 950", hex: "#0B132B" },
+    { name: "Neutral 000", variable: "--neutral-000" },
+    { name: "Neutral 050", variable: "--neutral-050" },
+    { name: "Neutral 100", variable: "--neutral-100" },
+    { name: "Neutral 200", variable: "--neutral-200" },
+    { name: "Neutral 300", variable: "--neutral-300" },
+    { name: "Neutral 400", variable: "--neutral-400" },
+    { name: "Neutral 500", variable: "--neutral-500" },
+    { name: "Neutral 600", variable: "--neutral-600" },
+    { name: "Neutral 700", variable: "--neutral-700" },
+    { name: "Neutral 800", variable: "--neutral-800" },
+    { name: "Neutral 900", variable: "--neutral-900" },
+    { name: "Neutral 950", variable: "--neutral-950" },
   ],
 
   primary: [
-    { name: "Primary 600", hex: "#6C5CE7" },
-    { name: "Primary 500", hex: "#8C7AE6" },
-    { name: "Primary 400", hex: "#A29BFE" },
-    { name: "Primary 200", hex: "#D6A2E8" },
-    { name: "Primary 050", hex: "#F3E5F5" },
+    { name: "Primary 600", variable: "--primary-600" },
+    { name: "Primary 500", variable: "--primary-500" },
+    { name: "Primary 400", variable: "--primary-400" },
+    { name: "Primary 200", variable: "--primary-200" },
+    { name: "Primary 050", variable: "--primary-050" },
   ],
 
   accents: [
-    { name: "Cyan Accent", hex: "#00F5D4" },
-    { name: "Cyan Mid", hex: "#00BBF9" },
-    { name: "Neon Pink", hex: "#FF007F" },
-    { name: "Solar Amber", hex: "#FFB703" },
-    { name: "Deep Violet", hex: "#7209B7" },
+    { name: "Cyan Accent", variable: "--accent-cyan" },
+    { name: "Cyan Mid", variable: "--accent-cyan-mid" },
+    { name: "Neon Pink", variable: "--accent-pink" },
+    { name: "Solar Amber", variable: "--accent-amber" },
+    { name: "Deep Violet", variable: "--accent-violet" },
   ],
 
   semantic: {
     success: [
-      { name: "Success Base", hex: "#10B981" },
-      { name: "Success Light", hex: "#34D399" },
-      { name: "Success Soft", hex: "#D1FAE5" },
-      { name: "Success Dark", hex: "#065F46" },
+      { name: "Success Base", variable: "--success" },
+      { name: "Success Light", variable: "--success-light" },
+      { name: "Success Soft", variable: "--success-soft" },
+      { name: "Success Dark", variable: "--success-dark" },
     ],
 
     warning: [
-      { name: "Warning Base", hex: "#F59E0B" },
-      { name: "Warning Light", hex: "#FBBF24" },
-      { name: "Warning Soft", hex: "#FEF3C7" },
-      { name: "Warning Dark", hex: "#92400E" },
+      { name: "Warning Base", variable: "--warning" },
+      { name: "Warning Light", variable: "--warning-light" },
+      { name: "Warning Soft", variable: "--warning-soft" },
+      { name: "Warning Dark", variable: "--warning-dark" },
     ],
 
     error: [
-      { name: "Error Base", hex: "#EF4444" },
-      { name: "Error Light", hex: "#F87171" },
-      { name: "Error Soft", hex: "#FEE2E2" },
-      { name: "Error Dark", hex: "#991B1B" },
+      { name: "Error Base", variable: "--error" },
+      { name: "Error Light", variable: "--error-light" },
+      { name: "Error Soft", variable: "--error-soft" },
+      { name: "Error Dark", variable: "--error-dark" },
+    ],
+
+    info: [
+      { name: "Info Base", variable: "--info" },
+      { name: "Info Light", variable: "--info-light" },
+      { name: "Info Soft", variable: "--info-soft" },
+      { name: "Info Dark", variable: "--info-dark" },
     ],
   },
 };
 
-const themes = {
+const themes: Record<"light" | "dark", ThemeToken[]> = {
   light: [
     {
       name: "Base Background",
       usage: "Canvas / Main Page",
-      hex: "#FFFFFF",
+      variable: "--background",
     },
     {
       name: "Surface",
       usage: "Modals, Panels, Cards",
-      hex: "#F8FAFC",
+      variable: "--surface",
     },
     {
       name: "Primary Text",
       usage: "Headings & Body Text",
-      hex: "#0F172A",
+      variable: "--text-primary",
     },
     {
       name: "Secondary Text",
       usage: "Subtitles & Captions",
-      hex: "#64748B",
+      variable: "--text-secondary",
     },
     {
       name: "Primary Action",
       usage: "Buttons, CTA, Active Tabs",
-      hex: "#6C5CE7",
+      variable: "--action-primary",
     },
     {
       name: "Secondary Accent",
       usage: "Highlights & Badges",
-      hex: "#00BBF9",
+      variable: "--accent-secondary",
     },
     {
       name: "Borders & Dividers",
       usage: "Subtle Component Outlines",
-      hex: "#E2E8F0",
+      variable: "--border-color",
     },
     {
       name: "Success UI",
       usage: "Badges, Success Alerts",
-      hex: "#10B981",
+      variable: "--success",
     },
     {
       name: "Warning UI",
       usage: "Alerts, Pending States",
-      hex: "#F59E0B",
+      variable: "--warning",
     },
     {
       name: "Error UI",
       usage: "Validation & Destructive Action",
-      hex: "#EF4444",
+      variable: "--error",
     },
     {
       name: "Info UI",
       usage: "Informational Callouts",
-      hex: "#3B82F6",
+      variable: "--info",
     },
   ],
 
@@ -120,57 +138,57 @@ const themes = {
     {
       name: "Base Background",
       usage: "Canvas / Main Page",
-      hex: "#0B132B",
+      variable: "--background",
     },
     {
       name: "Surface",
       usage: "Modals, Panels, Cards",
-      hex: "#1C2541",
+      variable: "--surface",
     },
     {
       name: "Primary Text",
       usage: "Headings & Body Text",
-      hex: "#F8FAFC",
+      variable: "--text-primary",
     },
     {
       name: "Secondary Text",
       usage: "Subtitles & Captions",
-      hex: "#94A3B8",
+      variable: "--text-secondary",
     },
     {
       name: "Primary Action",
       usage: "Buttons, CTA, Active Tabs",
-      hex: "#A29BFE",
+      variable: "--action-primary",
     },
     {
       name: "Secondary Accent",
       usage: "Highlights & Badges",
-      hex: "#00F5D4",
+      variable: "--accent-secondary",
     },
     {
       name: "Borders & Dividers",
       usage: "Subtle Component Outlines",
-      hex: "#334155",
+      variable: "--border-color",
     },
     {
       name: "Success UI",
       usage: "Badges, Success Alerts",
-      hex: "#34D399",
+      variable: "--success",
     },
     {
       name: "Warning UI",
       usage: "Alerts, Pending States",
-      hex: "#FBBF24",
+      variable: "--warning",
     },
     {
       name: "Error UI",
       usage: "Validation & Destructive Action",
-      hex: "#F87171",
+      variable: "--error",
     },
     {
       name: "Info UI",
       usage: "Informational Callouts",
-      hex: "#60A5FA",
+      variable: "--info",
     },
   ],
 };
@@ -179,73 +197,128 @@ const typography = [
   {
     name: "Display Title",
     role: "Hero Heading",
-    size: "32px",
-    lineHeight: "40px",
-    weight: 800,
-    tracking: "-0.02em",
+    size: "--text-display",
+    lineHeight: "--line-display",
+    weight: "--weight-extrabold",
+    tracking: "--tracking-display",
   },
   {
     name: "Heading 1",
     role: "Page Header",
-    size: "24px",
-    lineHeight: "32px",
-    weight: 700,
-    tracking: "-0.01em",
+    size: "--text-h1",
+    lineHeight: "--line-h1",
+    weight: "--weight-bold",
+    tracking: "--tracking-h1",
   },
   {
     name: "Heading 2",
     role: "Section Header",
-    size: "20px",
-    lineHeight: "28px",
-    weight: 600,
-    tracking: "-0.005em",
+    size: "--text-h2",
+    lineHeight: "--line-h2",
+    weight: "--weight-semibold",
+    tracking: "--tracking-h2",
   },
   {
     name: "Heading 3",
     role: "Card Title",
-    size: "16px",
-    lineHeight: "24px",
-    weight: 600,
-    tracking: "0em",
+    size: "--text-h3",
+    lineHeight: "--line-h3",
+    weight: "--weight-semibold",
+    tracking: "--tracking-default",
   },
   {
     name: "Body Large",
     role: "Lead paragraphs & intros",
-    size: "16px",
-    lineHeight: "24px",
-    weight: 400,
-    tracking: "0em",
+    size: "--text-body-large",
+    lineHeight: "--line-body-large",
+    weight: "--weight-regular",
+    tracking: "--tracking-default",
   },
   {
     name: "Body Default",
     role: "Standard component & body text",
-    size: "14px",
-    lineHeight: "20px",
-    weight: 400,
-    tracking: "0em",
+    size: "--text-body",
+    lineHeight: "--line-body",
+    weight: "--weight-regular",
+    tracking: "--tracking-default",
   },
   {
     name: "Body Small",
     role: "Captions, tooltips, and helpers",
-    size: "12px",
-    lineHeight: "16px",
-    weight: 400,
-    tracking: "0.005em",
+    size: "--text-small",
+    lineHeight: "--line-small",
+    weight: "--weight-regular",
+    tracking: "--tracking-small",
   },
   {
     name: "Overline / Badge",
     role: "Category tag",
-    size: "11px",
-    lineHeight: "14px",
-    weight: 700,
-    tracking: "0.08em",
+    size: "--text-overline",
+    lineHeight: "--line-overline",
+    weight: "--weight-bold",
+    tracking: "--tracking-overline",
   },
 ];
 
 export default function DesignSystem() {
   const [darkMode, setDarkMode] = useState(true);
+  const [tokenValues, setTokenValues] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const root = document.querySelector<HTMLElement>(".design-system");
+
+    if (!root) return;
+
+    const updateTokenValues = () => {
+      const styles = getComputedStyle(root);
+      const variables = new Set<string>();
+
+      const collectVariables = (items: ColorToken[] | ThemeToken[]) => {
+        items.forEach((item) => variables.add(item.variable));
+      };
+
+      collectVariables(colors.neutrals);
+      collectVariables(colors.primary);
+      collectVariables(colors.accents);
+
+      Object.values(colors.semantic).forEach(collectVariables);
+      Object.values(themes).forEach(collectVariables);
+
+      const values: Record<string, string> = {};
+
+      variables.forEach((variable) => {
+        values[variable] = styles.getPropertyValue(variable).trim();
+      });
+
+      setTokenValues(values);
+    };
+
+    updateTokenValues();
+
+    return () => {};
+  }, [darkMode]);
+
+  const renderColorCards = (items: ColorToken[]) => (
+    <div className="color-grid">
+      {items.map((color) => (
+        <div className="color-card" key={color.name}>
+          <div
+            className="color-swatch"
+            style={{ backgroundColor: `var(${color.variable})` }}
+          />
+
+          <strong>{color.name}</strong>
+          <p>{tokenValues[color.variable] || color.variable}</p>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
-    <div className={`design-system ${darkMode ? "dark" : "light"}`}>
+    <div
+      className={`design-system ${darkMode ? "dark" : "light"}`}
+      data-theme={darkMode ? "dark" : "light"}
+    >
       <header className="design-system-header">
         <div className="header-brand">
           <span className="header-icon">✦</span>
@@ -274,83 +347,24 @@ export default function DesignSystem() {
       </header>
 
       <main>
-
         <section>
           <h2>Colors</h2>
 
           <h3>Neutral Scale</h3>
-
-          <div className="color-grid">
-            {colors.neutrals.map((color) => (
-              <div className="color-card" key={color.name}>
-                <div
-                  className="color-swatch"
-                  style={{ backgroundColor: color.hex }}
-                />
-
-                <strong>{color.name}</strong>
-
-                <p>{color.hex}</p>
-              </div>
-            ))}
-          </div>
+          {renderColorCards(colors.neutrals)}
 
           <h3>Primary Colors</h3>
-
-          <div className="color-grid">
-            {colors.primary.map((color) => (
-              <div className="color-card" key={color.name}>
-                <div
-                  className="color-swatch"
-                  style={{ backgroundColor: color.hex }}
-                />
-
-                <strong>{color.name}</strong>
-
-                <p>{color.hex}</p>
-              </div>
-            ))}
-          </div>
+          {renderColorCards(colors.primary)}
 
           <h3>Accent Colors</h3>
-
-          <div className="color-grid">
-            {colors.accents.map((color) => (
-              <div className="color-card" key={color.name}>
-                <div
-                  className="color-swatch"
-                  style={{ backgroundColor: color.hex }}
-                />
-
-                <strong>{color.name}</strong>
-
-                <p>{color.hex}</p>
-              </div>
-            ))}
-          </div>
+          {renderColorCards(colors.accents)}
 
           <h3>Semantic Colors</h3>
 
           {Object.entries(colors.semantic).map(([category, shades]) => (
             <div key={category}>
-              <h4 style={{ textTransform: "capitalize" }}>
-                {category}
-              </h4>
-
-              <div className="color-grid">
-                {shades.map((color) => (
-                  <div className="color-card" key={color.name}>
-                    <div
-                      className="color-swatch"
-                      style={{ backgroundColor: color.hex }}
-                    />
-
-                    <strong>{color.name}</strong>
-
-                    <p>{color.hex}</p>
-                  </div>
-                ))}
-              </div>
+              <h4 style={{ textTransform: "capitalize" }}>{category}</h4>
+              {renderColorCards(shades)}
             </div>
           ))}
         </section>
@@ -359,51 +373,38 @@ export default function DesignSystem() {
           <h2>Themes</h2>
 
           <div className="theme-container">
-            <div className="theme-panel">
-              <h3>Light Mode</h3>
+            {(["light", "dark"] as const).map((themeName) => (
+              <div
+                className="theme-panel"
+                key={themeName}
+                data-theme={themeName}
+              >
+                <h3>
+                  {themeName === "light" ? "Light Mode" : "Dark Mode"}
+                </h3>
 
-              <div className="theme-grid">
-                {themes.light.map((token) => (
-                  <div className="theme-token" key={token.name}>
-                    <div
-                      className="theme-token-swatch"
-                      style={{ backgroundColor: token.hex }}
-                    />
+                <div className="theme-grid">
+                  {themes[themeName].map((token) => (
+                    <div className="theme-token" key={token.name}>
+                      <div
+                        className="theme-token-swatch"
+                        style={{
+                          backgroundColor: `var(${token.variable})`,
+                        }}
+                      />
 
-                    <strong>{token.name}</strong>
-
-                    <p>{token.usage}</p>
-
-                    <span>{token.hex}</span>
-                  </div>
-                ))}
+                      <strong>{token.name}</strong>
+                      <p>{token.usage}</p>
+                      <span>
+                        {tokenValues[token.variable] || token.variable}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            <div className="theme-panel">
-              <h3>Dark Mode</h3>
-
-              <div className="theme-grid">
-                {themes.dark.map((token) => (
-                  <div className="theme-token" key={token.name}>
-                    <div
-                      className="theme-token-swatch"
-                      style={{ backgroundColor: token.hex }}
-                    />
-
-                    <strong>{token.name}</strong>
-
-                    <p>{token.usage}</p>
-
-                    <span>{token.hex}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </section>
-
-
 
         <section>
           <h2>Typography</h2>
@@ -413,10 +414,11 @@ export default function DesignSystem() {
               <div className="typography-card" key={type.name}>
                 <div
                   style={{
-                    fontSize: type.size,
-                    lineHeight: type.lineHeight,
-                    fontWeight: type.weight,
-                    letterSpacing: type.tracking,
+                    fontFamily: "var(--font-primary)",
+                    fontSize: `var(${type.size})`,
+                    lineHeight: `var(${type.lineHeight})`,
+                    fontWeight: `var(${type.weight})`,
+                    letterSpacing: `var(${type.tracking})`,
                   }}
                 >
                   {type.name}
@@ -425,8 +427,10 @@ export default function DesignSystem() {
                 <p>{type.role}</p>
 
                 <span>
-                  {type.size} / {type.lineHeight} · {type.weight} ·{" "}
-                  {type.tracking}
+                  {tokenValues[type.size] || `var(${type.size})`} /{" "}
+                  {tokenValues[type.lineHeight] || `var(${type.lineHeight})`} ·{" "}
+                  {tokenValues[type.weight] || `var(${type.weight})`} ·{" "}
+                  {tokenValues[type.tracking] || `var(${type.tracking})`}
                 </span>
               </div>
             ))}
@@ -438,7 +442,10 @@ export default function DesignSystem() {
             <h3>Font Stack</h3>
 
             <p>
-              -apple-system,<br /> BlinkMacSystemFont, "Segoe UI", Roboto,<br />
+              -apple-system,
+              <br />
+              BlinkMacSystemFont, "Segoe UI", Roboto,
+              <br />
               "Helvetica Neue", Arial, sans-serif
             </p>
           </div>
@@ -447,8 +454,9 @@ export default function DesignSystem() {
             <h3>Monospace</h3>
 
             <p>
-              font-family: SFMono-Regular, Consolas, <br />
-              "Liberation Mono", Menlo, Courier, monospace;
+              SFMono-Regular, Consolas,
+              <br />
+              "Liberation Mono", Menlo, Courier, monospace
             </p>
           </div>
         </div>
