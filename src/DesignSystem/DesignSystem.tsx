@@ -260,8 +260,15 @@ const typography = [
   },
 ];
 
-export default function DesignSystem() {
-  const [darkMode, setDarkMode] = useState(true);
+type DesignSystemProps = {
+  darkMode: boolean;
+  setDarkMode: (value: boolean) => void;
+};
+
+export default function DesignSystem({
+  darkMode,
+  setDarkMode,
+}: DesignSystemProps) {
   const [tokenValues, setTokenValues] = useState<Record<string, string>>({});
 
   useEffect(() => {

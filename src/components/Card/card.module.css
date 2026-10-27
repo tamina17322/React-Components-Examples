@@ -1,15 +1,50 @@
 .card {
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--card-surface);
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.card:hover {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.header {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+}
+
+.footer {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-color);
 }
 
 .card h3 {
-  font-style: italic;
-  font-family: 'Courier New', Courier, monospace;
-  margin-top: 10px;
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-h3);
 }
 
 .card p {
-  margin-bottom: 15px;
+  margin: 0;
 }

@@ -1,0 +1,40 @@
+.text {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  text-wrap: pretty;
+}
+
+.display {
+  font-size: var(--text-display);
+  line-height: var(--line-display);
+  letter-spacing: var(--tracking-h1);
+}
+
+.bodyLarge {
+  font-size: var(--text-body-large);
+  line-height: var(--line-body-large);
+}
+
+.body {
+  font-size: var(--text-body);
+  line-height: var(--line-body);
+}
+
+.small {
+  font-size: var(--text-small);
+  line-height: var(--line-small);
+  color: var(--text-secondary);
+}
+
+.regular {
+  font-weight: var(--weight-regular);
+}
+
+.semibold {
+  font-weight: var(--weight-semibold);
+}
+
+.bold {
+  font-weight: var(--weight-bold);
+}

@@ -1,0 +1,67 @@
+.component-tests {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: var(--space-8);
+  background:
+    radial-gradient(
+      ellipse at top left,
+      var(--surface),
+      transparent 55%
+    ),
+    var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.component-tests *,
+.component-tests *::before,
+.component-tests *::after {
+  box-sizing: border-box;
+}
+
+.component-tests > h1 {
+  margin: 0 0 var(--space-3);
+  letter-spacing: var(--tracking-h1);
+}
+
+.component-tests > h2 {
+  margin: var(--space-8) 0 var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.component-tests > h3 {
+  margin: var(--space-5) 0 var(--space-3);
+  color: var(--text-primary);
+}
+
+.component-tests > div {
+  margin-bottom: var(--space-4);
+}
+
+.component-tests > .card,
+.component-tests > form {
+  margin-top: var(--space-4);
+}
+
+.component-tests input {
+  max-width: 100%;
+}
+
+.component-tests button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .component-tests {
+    padding: var(--space-4);
+  }
+
+  .component-tests > h2 {
+    margin-top: var(--space-6);
+  }
+}
