@@ -100,6 +100,13 @@
   --info-light: var(--blue-400);
   --info-soft: var(--blue-100);
   --info-dark: var(--blue-800);
+
+  --action-secondary: var(--neutral-100);
+  --action-ghost: transparent;
+  --action-danger: var(--red-500);
+  --focus-ring: var(--primary-600);
+  --text-on-action: var(--neutral-000);
+  --border-focus: var(--primary-600);
 }
 
 [data-theme="dark"] {
@@ -130,6 +137,13 @@
   --info-light: var(--blue-300);
   --info-soft: var(--blue-900);
   --info-dark: var(--blue-100);
+
+  --action-secondary: var(--neutral-800);
+  --action-ghost: transparent;
+  --action-danger: var(--red-400);
+  --focus-ring: var(--primary-400);
+  --text-on-action: var(--neutral-950);
+  --border-focus: var(--primary-400);
 }
 
 .design-system.light {
@@ -139,6 +153,7 @@
   --active-button-bg: rgb(var(--primary-400-rgb) / 0.12);
   --token-surface: rgb(var(--neutral-100-rgb) / 0.8);
 }
+
 .design-system.dark {
   --header-surface: rgb(var(--navy-surface-rgb) / 0.72);
   --card-surface: rgb(var(--navy-surface-rgb) / 0.7);
@@ -146,5 +161,3 @@
   --active-button-bg: rgb(var(--primary-400-rgb) / 0.12);
   --token-surface: rgb(var(--neutral-900-rgb) / 0.45);
 }
-
-
