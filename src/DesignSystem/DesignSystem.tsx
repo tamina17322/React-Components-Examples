@@ -271,6 +271,7 @@ export default function DesignSystem() {
 
     const updateTokenValues = () => {
       const styles = getComputedStyle(root);
+      const rootStyles = getComputedStyle(document.documentElement);
       const variables = new Set<string>();
 
       const collectVariables = (items: ColorToken[] | ThemeToken[]) => {
@@ -283,19 +284,24 @@ export default function DesignSystem() {
 
       Object.values(colors.semantic).forEach(collectVariables);
       Object.values(themes).forEach(collectVariables);
-
+      typography.forEach((type) => {
+        variables.add(type.size);
+        variables.add(type.lineHeight);
+        variables.add(type.weight);
+        variables.add(type.tracking);
+      });
       const values: Record<string, string> = {};
 
       variables.forEach((variable) => {
-        values[variable] = styles.getPropertyValue(variable).trim();
-      });
+        const value = styles.getPropertyValue(variable).trim();
+        const rootValue = rootStyles.getPropertyValue(variable).trim();
 
+        values[variable] = value || rootValue || variable;
+      });
       setTokenValues(values);
     };
 
     updateTokenValues();
-
-    return () => {};
   }, [darkMode]);
 
   const renderColorCards = (items: ColorToken[]) => (
