@@ -329,9 +329,7 @@ export default function DesignSystem({
 
   return (
     <div
-      className={`design-system ${darkMode ? "dark" : "light"}`}
-      data-theme={darkMode ? "dark" : "light"}
-    >
+      className={`design-system ${darkMode ? "dark" : "light"}`}>
       <header className="design-system-header">
         <div className="header-brand">
           <span className="header-icon">✦</span>
