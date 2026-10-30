@@ -1,0 +1,65 @@
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: fit-content;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background-color: var(--surface);
+  transition: all 180ms ease;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--action-primary);
+  transform: scale(0);
+  transition: transform 180ms ease;
+}
+
+.input:checked + .control {
+  border-color: var(--action-primary);
+}
+
+.input:checked + .control .dot {
+  transform: scale(1);
+}
+
+.input:focus-visible + .control {
+  outline: var(--space-1) solid var(--focus-ring);
+  outline-offset: var(--space-1);
+}
+
+.radio:hover .control {
+  border-color: var(--border-focus);
+}
+
+.label {
+  font-size: var(--text-body);
+  line-height: var(--line-body);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

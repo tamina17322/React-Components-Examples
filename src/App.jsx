@@ -7,9 +7,25 @@ import "./App.css";
 import Text from './components/Text/Text';
 import Heading from './components/Heading/Heading';
 import Form from "./components/Form/Form";
+import Badge from "./components/Badge/Badge";
+import Alert from "./components/Alert/Alert";
+import Checkbox from "./components/Checkbox/Checkbox";
+import Radio from "./components/Radio/Radio";
+import Switch from "./components/Switch/Switch";
+import Modal from './components/Modal/Modal';
+import Tabs from './components/Tabs/Tabs';
+import useTheme from './hooks/useTheme';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const { theme, setTheme } = useTheme();
+
+  const darkMode = theme === 'dark';
+  const setDarkMode = (value) => {
+    setTheme(value ? 'dark' : 'light');
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
   return (
     <>
@@ -20,7 +36,6 @@ function App() {
 
       <div
         className={`component-tests ${darkMode ? "dark" : "light"}`}
-        data-theme={darkMode ? "dark" : "light"}
       >
         <Heading level={2}>Button Component Test</Heading>
 
@@ -124,9 +139,161 @@ function App() {
           </Button>
         </Form>
 
+        <Heading level={2}>Badge Component Test</Heading>
+
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <Badge variant="neutral">Neutral</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="info">Info</Badge>
+        </div>
+
+        <Heading level={2}>Alert Component Test</Heading>
+
+        <Alert
+          variant="neutral"
+          title="Notice"
+          message="This is a neutral information message."
+        />
+
+        <Alert
+          variant="success"
+          title="Success"
+          message="Your changes have been saved successfully."
+        />
+
+        <Alert
+          variant="warning"
+          title="Warning"
+          message="Please review your information before continuing."
+        />
+
+        <Alert
+          variant="error"
+          title="Error"
+          message="Something went wrong. Please try again."
+        />
+
+        <Alert
+          variant="info"
+          title="Information"
+          message="Your account information is up to date."
+        />
+        <Heading level={2}>Checkbox Component Test</Heading>
+
+        <Checkbox
+          id="terms"
+          label="Accept terms and conditions"
+        />
+
+        <Checkbox
+          id="newsletter"
+          label="Subscribe to newsletter"
+          defaultChecked
+        />
+
+        <Checkbox
+          id="disabled-checkbox"
+          label="Disabled checkbox"
+          disabled
+        />
+        <Heading level={2}>Radio Component Test</Heading>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <Radio
+            id="option-one"
+            name="options"
+            value="one"
+            label="Option One"
+            defaultChecked
+          />
+
+          <Radio
+            id="option-two"
+            name="options"
+            value="two"
+            label="Option Two"
+          />
+
+          <Radio
+            id="option-three"
+            name="options"
+            value="three"
+            label="Option Three"
+          />
+        </div>
+        <Heading level={2}>Switch Component Test</Heading>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <Switch
+            id="notifications"
+            label="Enable notifications"
+            defaultChecked
+          />
+
+          <Switch
+            id="dark-mode"
+            label="Enable dark mode"
+            checked={darkMode}
+            onChange={(event) => setDarkMode(event.target.checked)}
+          />
+
+          <Switch
+            id="disabled-switch"
+            label="Disabled switch"
+            disabled
+          />
+        </div>
+
+        <Heading level={2}>Modal Component Test</Heading>
+
+        <Button onClick={() => setIsModalOpen(true)}>
+          Open Modal
+        </Button>
+
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title="Welcome to the Modal"
+        >
+          <Text>
+            This is a custom accessible modal component.
+            You can close it using the close button, Escape,
+            or by clicking outside the panel.
+          </Text>
+
+          <Button onClick={() => setIsModalOpen(false)}>
+            Close Modal
+          </Button>
+        </Modal>
+        <Heading level={2}>Tabs Component Test</Heading>
+
+        <Tabs
+          items={[
+            {
+              id: 'overview',
+              label: 'Overview',
+              content: <Text>Welcome to the overview tab.</Text>,
+            },
+            {
+              id: 'features',
+              label: 'Features',
+              content: <Text>Explore the features of our design system.</Text>,
+            },
+            {
+              id: 'settings',
+              label: 'Settings',
+              content: <Text>Manage your preferences here.</Text>,
+            },
+          ]}
+        />
+
+
       </div>
     </>
   );
 }
+
 
 export default App;

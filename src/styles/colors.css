@@ -107,6 +107,12 @@
   --focus-ring: var(--primary-600);
   --text-on-action: var(--neutral-000);
   --border-focus: var(--primary-600);
+
+  --header-surface: rgb(var(--neutral-000-rgb) / 0.9);
+  --card-surface: rgb(var(--neutral-000-rgb) / 0.85);
+  --button-surface: rgb(var(--neutral-000-rgb) / 0.8);
+  --active-button-bg: rgb(var(--primary-400-rgb) / 0.12);
+  --token-surface: rgb(var(--neutral-100-rgb) / 0.8);
 }
 
 [data-theme="dark"] {
@@ -144,17 +150,7 @@
   --focus-ring: var(--primary-400);
   --text-on-action: var(--neutral-950);
   --border-focus: var(--primary-400);
-}
 
-.design-system.light {
-  --header-surface: rgb(var(--neutral-000-rgb) / 0.9);
-  --card-surface: rgb(var(--neutral-000-rgb) / 0.85);
-  --button-surface: rgb(var(--neutral-000-rgb) / 0.8);
-  --active-button-bg: rgb(var(--primary-400-rgb) / 0.12);
-  --token-surface: rgb(var(--neutral-100-rgb) / 0.8);
-}
-
-.design-system.dark {
   --header-surface: rgb(var(--navy-surface-rgb) / 0.72);
   --card-surface: rgb(var(--navy-surface-rgb) / 0.7);
   --button-surface: rgb(var(--neutral-900-rgb) / 0.65);
