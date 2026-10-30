@@ -7,6 +7,8 @@ import "./App.css";
 import Text from './components/Text/Text';
 import Heading from './components/Heading/Heading';
 import Form from "./components/Form/Form";
+import Badge from "./components/Badge/Badge";
+import Alert from "./components/Alert/Alert";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -123,6 +125,49 @@ function App() {
             Submit
           </Button>
         </Form>
+
+        <Heading level={2}>Badge Component Test</Heading>
+
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <Badge variant="neutral">Neutral</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="info">Info</Badge>
+        </div>
+
+        <Heading level={2}>Alert Component Test</Heading>
+
+        <Alert
+          variant="neutral"
+          title="Notice"
+          message="This is a neutral information message."
+        />
+
+        <Alert
+          variant="success"
+          title="Success"
+          message="Your changes have been saved successfully."
+        />
+
+        <Alert
+          variant="warning"
+          title="Warning"
+          message="Please review your information before continuing."
+        />
+
+        <Alert
+          variant="error"
+          title="Error"
+          message="Something went wrong. Please try again."
+        />
+
+        <Alert
+          variant="info"
+          title="Information"
+          message="Your account information is up to date."
+        />
+
 
       </div>
     </>
