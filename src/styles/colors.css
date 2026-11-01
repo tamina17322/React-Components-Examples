@@ -81,29 +81,29 @@
   --accent-secondary: var(--accent-cyan-mid);
   --border-color: var(--neutral-200);
 
-  --success: var(--green-500);
+  --success: var(--green-800);
   --success-light: var(--green-400);
   --success-soft: var(--green-100);
   --success-dark: var(--green-800);
 
-  --warning: var(--amber-500);
+  --warning: var(--amber-800);
   --warning-light: var(--amber-400);
   --warning-soft: var(--amber-100);
   --warning-dark: var(--amber-800);
 
-  --error: var(--red-500);
+  --error: var(--red-800);
   --error-light: var(--red-400);
   --error-soft: var(--red-100);
   --error-dark: var(--red-800);
 
-  --info: var(--blue-500);
+  --info: var(--blue-800);
   --info-light: var(--blue-400);
   --info-soft: var(--blue-100);
   --info-dark: var(--blue-800);
 
   --action-secondary: var(--neutral-100);
   --action-ghost: transparent;
-  --action-danger: var(--red-500);
+  --action-danger: var(--red-800);
   --focus-ring: var(--primary-600);
   --text-on-action: var(--neutral-000);
   --border-focus: var(--primary-600);
@@ -134,12 +134,12 @@
   --warning-soft: var(--amber-900);
   --warning-dark: var(--amber-100);
 
-  --error: var(--red-400);
+  --error: var(--red-300);
   --error-light: var(--red-300);
   --error-soft: var(--red-900);
   --error-dark: var(--red-100);
 
-  --info: var(--blue-400);
+  --info: var(--blue-300);
   --info-light: var(--blue-300);
   --info-soft: var(--blue-900);
   --info-dark: var(--blue-100);

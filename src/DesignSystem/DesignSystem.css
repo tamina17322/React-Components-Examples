@@ -178,7 +178,7 @@
 
 
 .design-system.light .header-icon {
-  color: #ffffff;
+  color: var(--surface-primary);
 }
 
 @media (max-width: 900px) {
@@ -385,15 +385,15 @@
 }
 
 .design-system .theme-panel[data-theme="light"] {
-  color: #0f172a;
-  background: #ffffff;
-  border-color: #e2e8f0;
+  color: var(--neutral-900);
+  background: var(--surface-primary);
+  border-color: var(--neutral-200);
 }
 
 .design-system .theme-panel[data-theme="dark"] {
-  color: #f8fafc;
-  background: #0f172a;
-  border-color: #334155;
+  color: var(--neutral-50);
+  background: var(--neutral-900);
+  border-color: var(--neutral-700);
 }
 
 .design-system .theme-grid {
